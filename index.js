@@ -25,11 +25,13 @@ const user = new Twitter({
         count: 100,
       });
 
+      // boucler sur tous les tweet recu
       let allTweets = "";
       for (tweet of response.statuses) {
         allTweets += tweet.text + "\n";
       }
 
+      // recup le sentiment de chaque tweet
       const sentimentScore = await getSentimentScore(allTweets);
       console.log(`The sentiment about ${query} is: ${sentimentScore}`);
 
@@ -39,6 +41,7 @@ const user = new Twitter({
     }
 })();
 
+// utilisation de google-cloud/language pour recupèrer le sentiment des tweet (aime ou aime pas le sujet)
 async function getSentimentScore(text) {
     const document = {
         content: text,
